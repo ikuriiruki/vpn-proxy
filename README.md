@@ -65,20 +65,10 @@ sudo systemctl enable docker
 bash <(curl -s https://raw.githubusercontent.com/ikuriiruki/vpn-proxy/main/deploy.sh) clone && \
 cd vpn-proxy && \
 ./deploy.sh deploy
-```
 
-**Or use the dedicated installer:**
-
-```bash
-# Quick install
-bash <(curl -s https://raw.githubusercontent.com/ikuriiruki/vpn-proxy/main/install.sh)
-
-#If you want to install with a custom folder name
-bash <(curl -s https://raw.githubusercontent.com/ikuriiruki/vpn-proxy/main/install.sh) my-proxy
-
-# Then configure and deploy
-cd vpn-proxy
-nano .env  # Edit configuration
+# If you want to install with a custom folder name
+bash <(curl -s https://raw.githubusercontent.com/ikuriiruki/vpn-proxy/main/deploy.sh) clone my-proxy && \
+cd my-proxy && \
 ./deploy.sh deploy
 ```
 
