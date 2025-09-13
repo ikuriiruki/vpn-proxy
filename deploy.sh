@@ -79,9 +79,8 @@ check_dependencies() {
     if ! command_exists docker; then
         missing_deps+=("docker")
     fi
-    
-    if ! command_exists docker-compose; then
-        missing_deps+=("docker-compose")
+    if ! docker compose &>/dev/null; then
+        missing_deps+=("docker-compose-plugin")
     fi
     
     if ! command_exists envsubst; then
@@ -95,9 +94,9 @@ check_dependencies() {
     if [ ${#missing_deps[@]} -ne 0 ]; then
         print_error "Missing dependencies: ${missing_deps[*]}"
         print_status "Please install them using your package manager:"
-        print_status "  Ubuntu/Debian: sudo apt update && sudo apt install docker.io docker-compose gettext-base git"
-        print_status "  CentOS/RHEL: sudo yum install docker docker-compose gettext git"
-        print_status "  Arch Linux: sudo pacman -S docker docker-compose gettext git"
+        print_status "  Ubuntu/Debian: sudo apt update && sudo apt install docker.io docker-compose-plugin gettext-base git"
+        print_status "  CentOS/RHEL: sudo yum install docker docker-compose-plugin gettext git"
+        print_status "  Arch Linux: sudo pacman -S docker docker-compose-plugin gettext git"
         exit 1
     fi
     
@@ -262,8 +261,8 @@ deploy_proxy() {
         docker rm haproxy-proxy
     fi
     
-    # Start the proxy using docker-compose
-    docker-compose up -d
+    # Start the proxy using docker compose
+    docker compose up -d
     
     if [ $? -eq 0 ]; then
         print_success "VPN proxy deployed successfully"
@@ -305,14 +304,14 @@ show_logs() {
 # Function to stop the proxy
 stop_proxy() {
     print_status "Stopping VPN proxy..."
-    docker-compose down
+    docker compose down
     print_success "VPN proxy stopped"
 }
 
 # Function to restart the proxy
 restart_proxy() {
     print_status "Restarting VPN proxy..."
-    docker-compose restart
+    docker compose restart
     print_success "VPN proxy restarted"
 }
 

@@ -33,7 +33,7 @@ cd vpn-proxy && \
 
 ```bash
 sudo apt update
-sudo apt install docker.io docker-compose gettext-base
+sudo apt install docker.io docker-compose-plugin gettext-base
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
@@ -41,7 +41,7 @@ sudo systemctl enable docker
 **CentOS/RHEL:**
 
 ```bash
-sudo yum install docker docker-compose gettext
+sudo yum install docker docker-compose-plugin gettext
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
@@ -49,7 +49,7 @@ sudo systemctl enable docker
 **Arch Linux:**
 
 ```bash
-sudo pacman -S docker docker-compose gettext
+sudo pacman -S docker docker-compose-plugin gettext
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
@@ -175,10 +175,10 @@ export $(cat .env | xargs)
 envsubst < haproxy.cfg.template > haproxy.cfg
 
 # Start the proxy
-docker-compose up -d
+docker compose up -d
 
 # Stop the proxy
-docker-compose down
+docker compose down
 
 # View logs
 docker logs haproxy-proxy
