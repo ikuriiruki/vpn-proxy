@@ -34,15 +34,6 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Function to check if running as root
-check_root() {
-    if [[ $EUID -eq 0 ]]; then
-        print_error "This script should not be run as root for security reasons"
-        print_status "Please run as a regular user with sudo privileges"
-        exit 1
-    fi
-}
-
 # Function to clone repository
 clone_repository() {
     local repo_url="https://github.com/ikuriiruki/vpn-proxy"
@@ -354,7 +345,6 @@ main() {
             print_success "Repository ready! Run './deploy.sh deploy' to start deployment"
             ;;
         deploy)
-            check_root
             check_dependencies
             setup_environment
             validate_environment
