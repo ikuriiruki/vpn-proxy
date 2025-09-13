@@ -11,48 +11,48 @@ defaults
 
 # VMess TCP
 frontend vmess_tcp
-    bind *:${VMESS_TCP_PORT}
+    bind *:${VMESS_TCP_INBOUND_PORT}
     default_backend vmess_tcp_backend
 
 backend vmess_tcp_backend
-    server foreign ${FOREIGN_IP}:8081 check
+    server foreign ${FOREIGN_IP}:${VMESS_TCP_OUTBOUND_PORT} check
 
 # VMess WebSocket
 frontend vmess_ws
-    bind *:${VMESS_WS_PORT}
+    bind *:${VMESS_WS_INBOUND_PORT}
     default_backend vmess_ws_backend
 
 backend vmess_ws_backend
-    server foreign ${FOREIGN_IP}:8000 check
+    server foreign ${FOREIGN_IP}:${VMESS_WS_OUTBOUND_PORT} check
 
 # VLESS TCP REALITY
 frontend vless_reality_tcp
-    bind *:${VLESS_TCP_REALITY_PORT}
+    bind *:${VLESS_TCP_REALITY_INBOUND_PORT}
     default_backend vless_reality_tcp_backend
 
 backend vless_reality_tcp_backend
-    server foreign ${FOREIGN_IP}:8443 check
+    server foreign ${FOREIGN_IP}:${VLESS_TCP_REALITY_OUTBOUND_PORT} check
 
 # VLESS gRPC REALITY
 frontend vless_reality_grpc
-    bind *:${VLESS_GRPC_REALITY_PORT}
+    bind *:${VLESS_GRPC_REALITY_INBOUND_PORT}
     default_backend vless_reality_grpc_backend
 
 backend vless_reality_grpc_backend
-    server foreign ${FOREIGN_IP}:2053 check
+    server foreign ${FOREIGN_IP}:${VLESS_GRPC_REALITY_OUTBOUND_PORT} check
 
 # Trojan WebSocket TLS
 frontend trojan_ws
-    bind *:${TROJAN_WS_PORT}
+    bind *:${TROJAN_WS_INBOUND_PORT}
     default_backend trojan_ws_backend
 
 backend trojan_ws_backend
-    server foreign ${FOREIGN_IP}:2083 check
+    server foreign ${FOREIGN_IP}:${TROJAN_WS_OUTBOUND_PORT} check
 
 # Shadowsocks TCP
 frontend shadowsocks_tcp
-    bind *:${SHADOWSOCKS_TCP_PORT}
+    bind *:${SHADOWSOCKS_TCP_INBOUND_PORT}
     default_backend shadowsocks_tcp_backend
 
 backend shadowsocks_tcp_backend
-    server foreign ${FOREIGN_IP}:1080 check
+    server foreign ${FOREIGN_IP}:${SHADOWSOCKS_TCP_OUTBOUND_PORT} check
