@@ -137,9 +137,6 @@ The HAProxy configuration is automatically generated from the template (`haproxy
 ```bash
 # Clone repository with custom folder name
 bash <(curl -s https://raw.githubusercontent.com/ikuriiruki/vpn-proxy/main/deploy.sh) clone my-proxy
-
-# Quick install using dedicated installer
-bash <(curl -s https://raw.githubusercontent.com/ikuriiruki/vpn-proxy/main/install.sh)
 ```
 
 ### Deployment Commands
