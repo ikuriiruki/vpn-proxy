@@ -1,0 +1,58 @@
+global
+    log stdout format raw local0
+
+defaults
+    log     global
+    mode    tcp
+    option  tcplog
+    timeout connect 10s
+    timeout client 1m
+    timeout server 1m
+
+# VMess TCP
+frontend vmess_tcp
+    bind *:${VMESS_TCP_PORT}
+    default_backend vmess_tcp_backend
+
+backend vmess_tcp_backend
+    server foreign ${FOREIGN_IP}:8081 check
+
+# VMess WebSocket
+frontend vmess_ws
+    bind *:${VMESS_WS_PORT}
+    default_backend vmess_ws_backend
+
+backend vmess_ws_backend
+    server foreign ${FOREIGN_IP}:8000 check
+
+# VLESS TCP REALITY
+frontend vless_reality_tcp
+    bind *:${VLESS_TCP_REALITY_PORT}
+    default_backend vless_reality_tcp_backend
+
+backend vless_reality_tcp_backend
+    server foreign ${FOREIGN_IP}:8443 check
+
+# VLESS gRPC REALITY
+frontend vless_reality_grpc
+    bind *:${VLESS_GRPC_REALITY_PORT}
+    default_backend vless_reality_grpc_backend
+
+backend vless_reality_grpc_backend
+    server foreign ${FOREIGN_IP}:2053 check
+
+# Trojan WebSocket TLS
+frontend trojan_ws
+    bind *:${TROJAN_WS_PORT}
+    default_backend trojan_ws_backend
+
+backend trojan_ws_backend
+    server foreign ${FOREIGN_IP}:2083 check
+
+# Shadowsocks TCP
+frontend shadowsocks_tcp
+    bind *:${SHADOWSOCKS_TCP_PORT}
+    default_backend shadowsocks_tcp_backend
+
+backend shadowsocks_tcp_backend
+    server foreign ${FOREIGN_IP}:1080 check
